@@ -1,4 +1,4 @@
-﻿[![Build status](https://ci.appveyor.com/api/projects/status/rrb6quib6y72qjcg/branch/master?svg=true)](https://ci.appveyor.com/project/MKoster/PSNlog/branch/master) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/PS1EAE)
+﻿[![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/PS1EAE)
 
 # PS1EAE PowerShell module
 
@@ -91,7 +91,7 @@ As mentioned, there are certain limitation on the Web api, e.g. you can't remove
 
 ## License
 
-* see [LICENSE](LICENSE.md) file
+* see [LICENSE](LICENSE) file
 
 ## Contact
 
