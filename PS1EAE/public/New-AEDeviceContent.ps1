@@ -38,7 +38,6 @@ function New-AEDeviceContent {
         [int]$Version,
 
         # Specifies the size of the content in Bytes
-        [Parameter(Mandatory)]
         [ValidateScript({$_ -gt 0})]
         [int]$Size,
 
