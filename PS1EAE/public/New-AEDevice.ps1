@@ -12,7 +12,7 @@ function New-AEDevice {
         PS C:\>
 
     #>
-    [CmdLetBinding()]
+    [CmdLetBinding(DefaultParameterSetName="ByUUID")]
     param(
         # Specified the URI of the 1E ActiveEfficiency server
         [Parameter(Mandatory)]
@@ -22,6 +22,7 @@ function New-AEDevice {
         [Parameter(Mandatory)]
         [string]$HostName,
 
+        [Parameter(Mandatory)]
         [string]$DomainName,
 
         # Specifies the Fqdn of the machine.
@@ -33,11 +34,26 @@ function New-AEDevice {
         # - Source (eg "SMBIOS", or "FQDN")
         # - Identity (eg "AEC72B25-6D7E-11E1-8967-452301000030", or "MyMachine.Domain.com")
         # - CreatedBy
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, ParameterSetName="ByIdentities")]
         [PSCustomObject[]]$Identities,
 
+        # Specifies the SMBIOS GUID
+        [Parameter(Mandatory, ParameterSetName="ByUUID")]
+        [string]$SMBiosGuid,
+
+        # Specifies the Nomad UniqueIdentifier
+        # Typically stored in HKLM:\SOFTWARE\1E\Common
+        [Parameter(ParameterSetName="ByUUID")]
+        [string]$NomadUUID,
+
+        # Specifies the Device Type
         [ValidateSet("Unknown", "Desktop", "Laptop", "Server")]
         [string]$Type = "Unknown",
+
+        # Specifies the Device Type ID
+        # Can be specified if the underlying value is known
+        # Takes precedence over "Type" if specified
+        [int]$TypeID = -1,
 
         # Specifies the Creator of the entry
         [string]$CreatedBy = "1E Nomad"
@@ -53,11 +69,23 @@ function New-AEDevice {
             }
         }
 
-        switch ($Type) {
-            "Unknown" {$TypeID = 0; break}
-            "Desktop" {$TypeID = 1; break}
-            "Laptop" {$TypeID = 2; break}
-            "Server" {$TypeID = 3; break}
+        if ($TypeID -lt 0) {
+            switch ($Type) {
+                "Unknown" {$TypeID = 0; break}
+                "Desktop" {$TypeID = 1; break}
+                "Laptop" {$TypeID = 2; break}
+                "Server" {$TypeID = 3; break}
+            }
+        }
+
+        if (-Not([string]::IsNullOrWhiteSpace($SMBiosGuid))) {
+            $DeviceIdentities = @(@{Source = "SMBIOS"; Identity = $SMBiosGuid}, @{Source = "FQDN"; Identity = $FQDN})
+
+            if (-Not([string]::IsNullOrWhiteSpace($NomadUUID))) {
+                $DeviceIdentities += @{Source = "MACHINE_ID"; Identity = $NomadUUID}
+            }
+        } else {
+            $DeviceIdentities = $Identities
         }
 
         $Body = @{
@@ -66,7 +94,7 @@ function New-AEDevice {
             Fqdn = $Fqdn
             CreatedBy = $CreatedBy
             Type = $TypeID
-            DeviceIdentities = $Identities
+            DeviceIdentities = $DeviceIdentities
         }
 
         Invoke-AERequest -Method Put -AEServer $AEServer -ResourcePath $Path -Body $Body
