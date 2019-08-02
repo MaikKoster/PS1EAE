@@ -60,7 +60,7 @@ process {
                 if (-Not([string]::IsNullOrWhiteSpace($CS.Domain)) -and (-Not([string]::IsNullOrWhiteSpace($UUID)))) {
                     $DeviceType = [int](Get-ItemPropertyValue -Path $AERegPath -Name NomadDeviceType -ErrorAction SilentlyContinue)
 
-                    $Device = New-AEDevice -AEServer $AEInfo.PlatformUrl -HostName $CS.Name -DomainName $CS.Domain -SMBiosGuid $UUID -TypeID $DeviceType
+                    $Device = New-AEDevice -AEServer $AEInfo.PlatformUrl -HostName $CS.Name -DomainName $CS.Domain -SMBiosGuid $UUID -TypeID $DeviceType -Verbose:$false
 
                     $DeviceID = $Device.Id
                 } elseif ([string]::IsNullOrWhiteSpace($CS.Domain)) {
@@ -72,7 +72,7 @@ process {
                 if (-Not([string]::IsNullOrWhiteSpace($DeviceID))) {
                     if ($DeviceID -ne $AEInfo.DeviceID) {
                         Write-Log "Local DeviceId and DeviceId in Active Efficiency don't match. Restarting NomadBranch service to force re-evaluation." -Severity Warning
-                        Restart-Service -Name NomadBranch -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+                        Restart-Service -Name NomadBranch -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -Verbose:$false
                         # Use AE DeviceId to update content
                         $AEInfo.DeviceID = $DeviceID
                     }
@@ -87,7 +87,7 @@ process {
             Write-Log 'Get currently published device content from Active Efficiency.'
             $DeviceHash = @{}
             $DeviceContentCount = @{}
-            $DeviceContent = Get-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId
+            $DeviceContent = Get-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId -Verbose:$false
             $DeviceContent | ForEach-Object {$DeviceContentCount[($_.ContentName.ToLower())] += 1; $DeviceHash[($_.ContentName.ToLower())] = $_}
 
             Write-Log "Found $($DeviceContentCount.Count) content items in Active Efficiency."
@@ -139,7 +139,7 @@ process {
                             Write-Log "$($Name) ($Version): Multiple entries for content detected. Clean up Active Efficiency."
                             foreach ($ContentEntry in ($DeviceContent | Where-Object {$_.ContentName -eq $Name})) {
                                 try {
-                                    $RemovedContent = Remove-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId -ContentID $ContentEntry.Id
+                                    $RemovedContent = Remove-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId -ContentID $ContentEntry.Id -Verbose:$false
                                     if ($RemovedContent.WasSuccessful) {
                                         Write-Log "$($ContentEntry.ContentName) ($($ContentEntry.Version)): $($RemovedContent.Message)"
                                     } else {
@@ -159,7 +159,7 @@ process {
                         if ($null -eq $ContentCount) {
                             # Content available locally but not registered in AE
                             # Publish to AE
-                            $NewContent = New-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceID -Name $Name -Version $Version -Percent 100 -StartTime $StartTime -EndTime $EndTime
+                            $NewContent = New-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceID -Name $Name -Version $Version -Percent 100 -StartTime $StartTime -EndTime $EndTime -Verbose:$false
                             Write-Log "$($Name) ($($Version)): Added content delivery '$($NewContent.Id)'"
 
                             # Add new content to Hashtable
@@ -170,7 +170,7 @@ process {
                             $ContentEntry = $DeviceHash[$Name.ToLower()]
 
                             if (($null -ne $ContentEntry) -and ([Math]::Floor($ContentEntry.Percent) -ne 100)) {
-                                $UpdatedContent = Update-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceID -ContentID $ContentEntry.Id -Percent 100 -EndTime $EndTime
+                                $UpdatedContent = Update-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceID -ContentID $ContentEntry.Id -Percent 100 -EndTime $EndTime -Verbose:$false
                                 if ($UpdatedContent.WasSuccessful) {
                                     Write-Log "$($Name) ($($Version)): Updated content delivery $($UpdatedContent.Value)"
                                 } else {
@@ -194,7 +194,7 @@ process {
 
                         if ($null -ne $ContentEntry) {
                             try {
-                                $RemovedContent = Remove-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId -ContentID $ContentEntry.Id
+                                $RemovedContent = Remove-AEDeviceContent -AEServer $AEInfo.PlatformUrl -DeviceID $AEInfo.DeviceId -ContentID $ContentEntry.Id -Verbose:$false
                                 if ($RemovedContent.WasSuccessful) {
                                     Write-Log "$($ContentEntry.ContentName) ($($ContentEntry.Version)): $($RemovedContent.Message)"
                                 } else {
@@ -355,7 +355,8 @@ begin {
             $LogText | Out-File -FilePath $Path -Append -Force -Encoding default -NoClobber -ErrorAction SilentlyContinue
 
             # forward to pipeline
-            if ($PassThru.IsPresent) {
+            $Verbose = $VerbosePreference -ne 'SilentlyContinue'
+            if ($PassThru.IsPresent -or $Verbose) {
                 switch ($Severity) {
                     'Error' { Write-Error $Message }
                     'Warning' { Write-Warning $Message }
