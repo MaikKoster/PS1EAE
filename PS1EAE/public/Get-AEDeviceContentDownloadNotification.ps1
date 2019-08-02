@@ -27,7 +27,10 @@ function Get-AEDeviceContentDownloadNotification {
         [int]$Top = 100,
 
         # Specifies how many batches should be skipped
-        [int]$Skip = 0
+        [int]$Skip = 0,
+
+        # Specifies, if only the latest version should be returned
+        [switch]$LatestVersionOnly
     )
 
     process{
@@ -40,6 +43,10 @@ function Get-AEDeviceContentDownloadNotification {
         if ($Top -gt 0 ) {
             $Body.'$Top' = $Top
             $Body.'$Skip' = $Skip
+        }
+
+        if ($LatestVersionOnly.IsPresent) {
+            $Body.LatestVersionOnly = $LatestVersionOnly.IsPresent
         }
 
         Invoke-AERequest -Method Get -AEServer $AEServer -ResourcePath $Path -Body $Body
