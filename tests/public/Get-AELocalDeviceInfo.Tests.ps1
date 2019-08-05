@@ -9,7 +9,7 @@ if (-Not(Get-Module -Name "$ModuleName")) {
 
 InModuleScope "$ModuleName" {
     Describe 'Get-AELocalDeviceInfo' {
-        It 'Get Actove Efficiency info from registry' {
+        It 'Get Active Efficiency info from registry' {
             Mock Test-Path {$true}
 
             Mock Get-ItemProperty { [PSCustomObject]@{

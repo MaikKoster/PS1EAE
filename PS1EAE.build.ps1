@@ -281,7 +281,7 @@ task CreateModulePSM1 {
     # Put the License on top
     If (Test-Path($LicensePath)) {
         Write-Output '      Add License'
-        $CombineFiles += (Get-Content -Path "$LicensePath" | ForEach-Object{"# $_`r`n"})
+        $CombineFiles += (Get-Content -Path "$LicensePath" | ForEach-Object{if([string]::IsNullOrWhiteSpace($_)) {"#`r`n"} else {"# $_`r`n"}})
     }
 
     $PublicPath = Join-Path -Path $ScratchPath -ChildPath $PublicFunctionSource
