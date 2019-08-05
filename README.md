@@ -1,4 +1,4 @@
-﻿[![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/PS1EAE)
+﻿[![Build status](https://ci.appveyor.com/api/projects/status/7mfb39slx2s8yuok/branch/master?svg=true)](https://ci.appveyor.com/project/MKoster/ps1eae/branch/master) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/PS1EAE)
 
 # PS1EAE PowerShell module
 
