@@ -2,85 +2,85 @@
 Module Name: PS1EAE
 Module Guid: b7b3fff5-dd61-4fbc-824e-4fe820aae3e0
 Download Help Link: https://github.com/MaikKoster/PS1EAE//blob/master/docs/PS1EAE.md
-Help Version: 0.0.1
+Help Version: 0.1.0
 Locale: en-US
 ---
 
 # PS1EAE Module
 ## Description
-Wrapper for the 1E ActiveEfficiency API to easily access ActiveEfficency information from PowerShell.
+{{ Fill in the Description }}
 
 ## PS1EAE Cmdlets
 ### [Find-AEContent](Find-AEContent.md)
-Returns ActiveEfficiency Devices.
+{{ Fill in the Description }}
 
 ### [Get-AEAllDeviceIDs](Get-AEAllDeviceIDs.md)
-Returns all Active Efficiency Device IDs.
+{{ Fill in the Description }}
 
 ### [Get-AEContentDistributionJob](Get-AEContentDistributionJob.md)
-Returns ActiveEfficiency Content Distribution Jobs.
+{{ Fill in the Description }}
 
 ### [Get-AEDevice](Get-AEDevice.md)
-Returns ActiveEfficiency Devices.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceAdapterConfiguration](Get-AEDeviceAdapterConfiguration.md)
-Returns ActiveEfficiency Device adapter configuration.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceContent](Get-AEDeviceContent.md)
-Returns ActiveEfficiency Device content.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceContentDownloadNotification](Get-AEDeviceContentDownloadNotification.md)
-Returns ActiveEfficiency Device content download notifications.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceData](Get-AEDeviceData.md)
-Returns ActiveEfficiency Device data.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceProperties](Get-AEDeviceProperties.md)
-Returns ActiveEfficiency Device properties.
+{{ Fill in the Description }}
 
 ### [Get-AEDeviceTag](Get-AEDeviceTag.md)
-Returns ActiveEfficiency Device tags.
+{{ Fill in the Description }}
 
 ### [Get-AELocalDeviceInfo](Get-AELocalDeviceInfo.md)
-Returns AE related information about the local Device
+{{ Fill in the Description }}
 
 ### [Get-AELocation](Get-AELocation.md)
-Returns ActiveEfficiency Locations.
+{{ Fill in the Description }}
 
 ### [New-AEDevice](New-AEDevice.md)
-Creates a new ActiveEfficiency Device
+{{ Fill in the Description }}
 
 ### [New-AEDeviceAdapterConfiguration](New-AEDeviceAdapterConfiguration.md)
-Creates new ActiveEfficiency Device adapter configuration.
+{{ Fill in the Description }}
 
 ### [New-AEDeviceContent](New-AEDeviceContent.md)
-Creates new ActiveEfficiency Device content.
+{{ Fill in the Description }}
 
 ### [New-AEDeviceTag](New-AEDeviceTag.md)
-Adds a single device tag to the list of device tags
+{{ Fill in the Description }}
 
 ### [New-AELocation](New-AELocation.md)
-Adds a new AE Location
+{{ Fill in the Description }}
 
 ### [Remove-AEDeviceAdapterConfiguration](Remove-AEDeviceAdapterConfiguration.md)
-Removes an ActiveEfficiency Device Adapter Configuration.
+{{ Fill in the Description }}
 
 ### [Remove-AEDeviceContent](Remove-AEDeviceContent.md)
-Removes an ActiveEfficiency Device content entry.
+{{ Fill in the Description }}
 
 ### [Remove-AELocation](Remove-AELocation.md)
-Removes an ActiveEfficiency Location.
+{{ Fill in the Description }}
 
 ### [Update-AEDevice](Update-AEDevice.md)
-Updates an existing ActiveEfficiency Device
+{{ Fill in the Description }}
 
 ### [Update-AEDeviceAdapterConfiguration](Update-AEDeviceAdapterConfiguration.md)
-Updates an existing Active Efficiency Device adapter configuration.
+{{ Fill in the Description }}
 
 ### [Update-AEDeviceContent](Update-AEDeviceContent.md)
-Updates an existing ActiveEfficiency Device content entry.
+{{ Fill in the Description }}
 
 ### [Update-AEDeviceTag](Update-AEDeviceTag.md)
-Updates a single device tag
+{{ Fill in the Description }}
 
 

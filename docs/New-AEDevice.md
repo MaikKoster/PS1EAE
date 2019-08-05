@@ -12,9 +12,16 @@ Creates a new ActiveEfficiency Device
 
 ## SYNTAX
 
+### ByUUID (Default)
 ```
-New-AEDevice [-AEServer] <String> [-HostName] <String> [[-DomainName] <String>] [[-Fqdn] <String>]
- [-Identities] <PSObject[]> [[-Type] <String>] [[-CreatedBy] <String>] [<CommonParameters>]
+New-AEDevice -AEServer <String> -HostName <String> -DomainName <String> [-Fqdn <String>] -SMBiosGuid <String>
+ [-NomadUUID <String>] [-Type <String>] [-TypeID <Int32>] [-CreatedBy <String>] [<CommonParameters>]
+```
+
+### ByIdentities
+```
+New-AEDevice -AEServer <String> -HostName <String> -DomainName <String> [-Fqdn <String>]
+ -Identities <PSObject[]> [-Type <String>] [-TypeID <Int32>] [-CreatedBy <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,14 +47,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -HostName
-{{Fill HostName Description}}
+{{ Fill HostName Description }}
 
 ```yaml
 Type: String
@@ -55,22 +62,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DomainName
-{{Fill DomainName Description}}
+{{ Fill DomainName Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 3
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -86,7 +93,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -102,18 +109,49 @@ Each Identity should contain
 
 ```yaml
 Type: PSObject[]
-Parameter Sets: (All)
+Parameter Sets: ByIdentities
 Aliases:
 
 Required: True
-Position: 5
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SMBiosGuid
+Specifies the SMBIOS GUID
+
+```yaml
+Type: String
+Parameter Sets: ByUUID
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NomadUUID
+Specifies the Nomad UniqueIdentifier
+Typically stored in HKLM:\SOFTWARE\1E\Common
+
+```yaml
+Type: String
+Parameter Sets: ByUUID
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Type
-{{Fill Type Description}}
+Specifies the Device Type
 
 ```yaml
 Type: String
@@ -121,8 +159,25 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: Named
 Default value: Unknown
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TypeID
+Specifies the Device Type ID
+Can be specified if the underlying value is known
+Takes precedence over "Type" if specified
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: -1
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -136,15 +191,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: Named
 Default value: 1E Nomad
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

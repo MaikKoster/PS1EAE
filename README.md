@@ -26,7 +26,7 @@ PowerShell Version 3.0+
 
 ### Manual Install
 
-Download [PS1EAE-0.0.1.zip](https://github.com/MaikKoster/PS1EAE/releases/download/v0.0.1/PS1EAE-0.0.1.zip) and extract the contents into `'C:\Users\[User]\Documents\WindowsPowerShell\Modules\PS1EAE'` (you may have to create these directories if they don't exist.). Then run
+Download [PS1EAE-0.1.0.zip](https://github.com/MaikKoster/PS1EAE/releases/download/v0.1.0/PS1EAE-0.1.0.zip) and extract the contents into `'C:\Users\[User]\Documents\WindowsPowerShell\Modules\PS1EAE'` (you may have to create these directories if they don't exist.). Then run
 
 ```powershell
     Get-ChildItem 'C:\Users\[User]\Documents\WindowsPowerShell\Modules\PS1EAE\' -Recurse | Unblock-File
@@ -97,3 +97,4 @@ As mentioned, there are certain limitation on the Web api, e.g. you can't remove
 
 * Twitter: [@Maik_Koster](https://twitter.com/Maik_Koster)
 * Blog: [MaikKoster.com](http://MaikKoster.com/)
+
