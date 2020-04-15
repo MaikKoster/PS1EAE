@@ -1,6 +1,6 @@
 ﻿# PS1EAE Module Release History
 
-## [0.1.1] - Unreleased
+## [0.1.1] - 2020-04-15
 
 Fixed Bug when using Powershell version 3
 
@@ -20,3 +20,4 @@ Initial public release, supporting the following actions:
 ## [0.0.1] - Unreleased
 
 Internal release, implementing core framework
+

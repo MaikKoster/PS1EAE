@@ -2,7 +2,7 @@
 Module Name: PS1EAE
 Module Guid: b7b3fff5-dd61-4fbc-824e-4fe820aae3e0
 Download Help Link: https://github.com/MaikKoster/PS1EAE//blob/master/docs/PS1EAE.md
-Help Version: 0.1.0
+Help Version: 0.1.1
 Locale: en-US
 ---
 
