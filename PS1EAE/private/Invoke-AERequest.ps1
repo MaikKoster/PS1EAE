@@ -35,7 +35,27 @@ function Invoke-AERequest {
         }
 
         try {
-            $Result = Invoke-RestMethod @InvokeParams -ErrorVariable RestError -ErrorAction SilentlyContinue
+            if ($PSVersionTable.PSVersion.Major -gt 3) {
+                $Result = Invoke-RestMethod @InvokeParams -ErrorVariable RestError -ErrorAction SilentlyContinue
+            } else {
+                # PS3.0 doesnt allow ACCEPT header for Invoke-RestMethod, so using webclient and UploadData to allow set ContentType
+                $WebClient = New-Object System.Net.WebClient
+                $WebClient.Headers['Content-Type'] = $InvokeParams.ContentType
+                $InvokeParams.Headers.GetEnumerator() | ForEach-Object { $WebClient.Headers[$_.key]=$_.value}
+                $Encoding = [System.Text.Encoding]::UTF8
+                #TODO: Test body with GET. Might need to convert to url parameters instead
+                # DELETE typically has no body. Need to pass in proper HTTP Method.
+                #TODO: Validate for other http methods.
+                if ($InvokeParams.Body -or $InvokeParams.Method -eq "Delete") {
+                    if ($InvokeParams.Method -eq "Delete") {
+                        $InvokeParams.Body = ""
+                    }
+                    $Data = $WebClient.UploadData($InvokeParams.Uri, $InvokeParams.Method, $Encoding.GetBytes($InvokeParams.Body))
+                } else {
+                    $Data = $WebClient.DownloadData($InvokeParams.Uri)
+                }
+                $Result = ConvertFrom-Json $Encoding.GetString($data)
+            }
         } catch {
             # Handle certain exceptions in a better way
             if ($_.exception -is [System.Net.WebException]) {
