@@ -14,7 +14,7 @@ Creates new ActiveEfficiency Device content.
 
 ```
 New-AEDeviceContent [-AEServer] <String> [-DeviceID] <String> [-Name] <String> [-Version] <Int32>
- [-Size] <Int32> [[-NumberOfFiles] <Int32>] [[-Percent] <Int32>] [[-StartTime] <DateTime>]
+ [[-Size] <Int32>] [[-NumberOfFiles] <Int32>] [[-Percent] <Int32>] [[-StartTime] <DateTime>]
  [[-EndTime] <DateTime>] [<CommonParameters>]
 ```
 
@@ -99,7 +99,7 @@ Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 5
 Default value: 0
 Accept pipeline input: False
@@ -168,8 +168,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

@@ -14,7 +14,7 @@ Returns ActiveEfficiency Device content download notifications.
 
 ```
 Get-AEDeviceContentDownloadNotification [-AEServer] <String> [-DeviceID] <String> [[-Top] <Int32>]
- [[-Skip] <Int32>] [<CommonParameters>]
+ [[-Skip] <Int32>] [-LatestVersionOnly] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,9 +91,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -LatestVersionOnly
+Specifies, if only the latest version should be returned
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
