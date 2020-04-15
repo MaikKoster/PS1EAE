@@ -56,6 +56,8 @@ function Update-AEDeviceContent {
 
         if ($null -ne $EndTime) {
             $Content.EndTime = $EndTime.ToUniversalTime().ToString('u')
+        } elseif ($Percent -eq 100) {
+            $Content.EndTime = (Get-Date).ToUniversalTime().ToString('u')
         }
 
         Invoke-AERequest -Method Put -AEServer $AEServer -ResourcePath $Path -Body $Content

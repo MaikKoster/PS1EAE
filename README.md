@@ -88,6 +88,7 @@ As mentioned, there are certain limitation on the Web api, e.g. you can't remove
 ## Contributors
 
 * [Maik Koster](https://github.com/MaikKoster)
+* Rustam Gadeev
 
 ## License
 
